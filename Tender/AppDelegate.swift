@@ -8,6 +8,35 @@
 
 import UIKit
 
+//MARK: - dlog
+func dlog(_ message: String, _ filePath: String = #file, _ functionName: String = #function, _ lineNum: Int = #line)
+{
+    #if DEBUG
+        
+        let url  = URL(fileURLWithPath: filePath)
+        let path = url.lastPathComponent
+        var fileName = "Unknown"
+        if let name = path.characters.split(separator: ",").map(String.init).first {
+            fileName = name
+        }
+        let logString = String(format: "%@.%@[%d]: %@", fileName, functionName, lineNum, message)
+        NSLog(logString)
+        
+    #endif
+    
+}
+
+extension Int {
+    var degreesToRadians: Double { return Double(self) * .pi / 180 }
+    var radiansToDegrees: Double { return Double(self) * 180 / .pi }
+}
+extension FloatingPoint {
+    var degreesToRadians: Self { return self * .pi / 180 }
+    var radiansToDegrees: Self { return self * 180 / .pi }
+}
+
+
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
